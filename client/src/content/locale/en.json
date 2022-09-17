@@ -1,0 +1,136 @@
+{
+    "header": {
+        "men": "Men",
+        "women":"Women",
+        "children": "Children",
+        "brands":"Brands",
+        "additional":"Additional",
+        "login": "Login"
+    },
+    "admin_header": {
+        "dashboard":"Dashboard",
+        "table":"Table",
+        "charts":"Charts",
+        "products":"Products",
+        "orders":"Orders",
+        "users":"Users",
+        "reviews":"Reviews",
+        "list":"List",
+        "new":"New",
+        "update":"Update"
+    },
+
+    "login": {
+        "email":"Email",
+        "password":"Password",
+        "button": "Login",
+        "forgot": "Forgot Password?",
+        "register": "New User? Register Now!"
+    },
+
+    "register": {
+        "name": "Name and Surname",
+        "phone": "Phone Number",
+        "avatar": "Upload Photo",
+        "avatar_success": "Successfully uploaded",
+        "button": "Register",
+        "login":"Already have an account? Login"
+    },
+    "password": {
+        "old":"Old Password",
+        "new":"New Password",
+        "comfirm":"Comfirm Password",
+        "save":"Save Changes"
+    },
+
+    "user_settings": {
+        "account":"Account",
+        "cart": "Cart",
+        "notifications": "Notifications",
+        "favourite": "Favourites",
+        "contact": "Contact",
+        "theme": "Change Theme",
+        "language": "Change Language",
+        "login":"Login",
+        "logout": "Logout"
+      
+    },
+
+    "account": {
+        "profile":"My Profile",
+        "email":"Email",
+        "password":"Password",
+        "name": "Name and Surname",
+        "phone": "Phone Number",
+        "avatar": "Upload Photo",
+        "joined": "Joined Since",
+        "edit": "Edit Account",
+        "orders":"My Orders",
+        "change_password":"Change Password",
+        "save": "Save Changes", 
+        "delete":"Delete Account"
+    },
+
+    "cart": {
+        "empty": "Looks like your cart is empty..",
+        "recommendation": "Check out some of our new products",
+        "remove": "Remove",
+        "image":"Image",
+        "product":"Product",
+        "quantity":"Quantity",
+        "subtotal":"Subtotal",
+        "total":"Total: ",
+        "currency": "Den",
+        "checkout":"Check Out"
+    },
+    "checkout": {
+        "shipping": "Shipping",
+        "payment":"Payment",
+        "comfirm":"Comfirm"
+    },
+
+    "not_found": {
+        "content": "Ooops... The page you requested was not found...",
+        "home":"Home"
+    },
+
+    "footer": {
+            "information": "Information",
+            "about": "About us",
+            "delivery": "Terms of delivery",
+            "privacy": "Privacy concerns",
+            "use": "Terms of use",
+            "cookies": "Cookies policy",
+            "marketing": "Marketing policy",
+            "reclamation": "Reclamation",
+        
+            "extra": "Extra",
+            "brands": "Brands",
+            "gift": "Gift certificates",
+            "affiliate": "Affiliate",
+            "special": "Special offers",
+            "map": "Site's map",
+            "invoice": "My invoices",
+            "order": "Order history",
+            "bulletin": "Bulletin",
+       
+            "contact": "Contact",
+            "address": "Kej 13 November G.T.C-bb 1000 Skopje",
+            "phone": "02 3133.111",
+            "email": "info@polini.com.mk",
+        
+            "subscribe": "Sign up for our newsletters!",
+            "content": "Subscribe to POLINI's email list to receive notifications of new models, offers and other discount information.",
+            "input": "Enter your e-mail adress here",
+            "button": "Subscribe",
+
+            "rights": "Copyright And Copy; 2022 POLINI. All rights reserved."
+        
+    },
+    "admin_dashboard": {
+        "header": "Dashboard",
+        "users": "Users",
+        "products": "Products",
+        "orders": "Orders"
+    }
+}

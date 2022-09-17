@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    background-color: transparent;
+    padding:0;
+
+  }
+
+  /* ::-webkit-scrollbar {
+    width:15px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #27242a;
+    
+  }
+  
+  ::-webkit-scrollbar-thumb  {
+  background-image: linear-gradient(#6e2aa4, #5cbc63);
+  
+  border-radius: 25px;
+} */
