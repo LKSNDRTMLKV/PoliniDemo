@@ -2,6 +2,19 @@ import Order from "../models/orderModel.js";
 import Product from '../models/productModel.js';
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import messageHandler from "../utils/messageHandler.js";
+import successHandler from "../utils/successHandler.js";
+
+const {
+    ORDER_CREATE,
+    ORDERS_LENGTH,
+    ORDERS_NONE,
+    ORDER_FOUND,
+    ORDER_NOT_FOUND,
+    ORDER_DELIVERED,
+    ORDER_UPDATE,
+    ORDER_DELETE
+} = messageHandler.orderMessages;
 
 
 //Create Order
@@ -28,60 +41,58 @@ const newOrder = catchAsyncErrors(async (req, res, next) => {
         user: req.user._id,
     });
 
-    res.status(201).json({
-        success: true,
-        order
-    })
-
+    successHandler(res, 201, order, ORDER_CREATE);
 });
 //Get All Orders --User
 const getUserOrders = catchAsyncErrors(async (req, res, next) => {
     const orders = await Order.find({ user: req.user._id });
 
-    // if(!orders) {
-    //     return next(new ErrorHandler("You have no orders", 400));
-    // }
-  
-    res.status(200).json({
-      success: true,
-      orders,
-    });
-  });
+    if (!orders) {
+        return next(new ErrorHandler(ORDERS_NONE, 400));
+    }
+
+    successHandler(res, 200, orders, ORDERS_LENGTH(orders.length));
+});
 
 //Get All Orders --Admin
-const getAllOrders = catchAsyncErrors(async (req, res, next ) => {
+const getAllOrders = catchAsyncErrors(async (req, res, next) => {
     const orders = await Order.find();
 
     let totalAmount = 0;
-    orders.forEach(order => totalAmount+=order.totalPrice);
+    orders.forEach(order => totalAmount += order.totalPrice);
 
-    res.status(200).json({
-        success: true,
-        message:`There are currently ${orders.length} orders`,
-        totalAmount,
-        orders
-    })
+    successHandler(res, 200, { orders, totalAmount }, ORDERS_LENGTH(orders.length));
 });
 
 //Get Order 
-const getOrder = catchAsyncErrors(async (req, res, next ) => {
+const getOrder = catchAsyncErrors(async (req, res, next) => {
     const order = await Order.findById(req.params.id).populate("user", "name email");
 
-    if(!order) {
-        return next(new ErrorHandler("Order not found with this id",404));
+    if (!order) {
+        return next(new ErrorHandler(ORDER_NOT_FOUND(req.params.id), 404));
     }
-    res.status(200).json({
-        success: true,
-        order,
-    });
-})
+
+    successHandler(res, 200, order, ORDER_FOUND)
+});
+
+async function updateStock(id, quantity) {
+    const product = await Product.findById(id);
+
+    product.stock -= quantity;
+    await product.save({ validateBeforeSave: false })
+};
+
 
 //Update Order Status --Admin
 const updateOrder = catchAsyncErrors(async (req, res, next) => {
     const order = await Order.findById(req.params.id);
 
-    if(order.orderStatus === "Delivered") {
-        return next(new ErrorHandler("This order has been delivered",400));
+    if (!order) {
+        return next(new ErrorHandler(ORDER_NOT_FOUND(req.params.id), 404))
+    }
+
+    if (order.orderStatus === "Delivered") {
+        return next(new ErrorHandler(ORDER_DELIVERED, 400));
     }
 
     order.orderItems.forEach(async (item) => {
@@ -90,46 +101,35 @@ const updateOrder = catchAsyncErrors(async (req, res, next) => {
 
     order.orderStatus = req.body.status;
 
-    if(req.body.status === "Delivered") {
+    if (req.body.status === "Delivered") {
         order.deliveredAt = Date.now();
     }
 
-    await order.save({validateBeforeSave: false})
+    await order.save({ validateBeforeSave: false })
 
-    res.status(200).json({
-        success: true,
-        order
-    })
+    successHandler(res, 200, order, ORDER_UPDATE);
 });
 
-async function updateStock(id,quantity) {
-    const product = await Product.findById(id);
-
-    product.stock -= quantity;
-    await product.save({validateBeforeSave: false})
-};
 
 //Delete Order --Admin
 const deleteOrder = catchAsyncErrors(async (req, res, next) => {
     const order = await Order.findByIdAndDelete(req.params.id);
 
-    if(!order) {
-        return next(new ErrorHandler("Order not found", 404));
+    if (!order) {
+        return next(new ErrorHandler(ORDER_NOT_FOUND(req.params.id), 404));
     }
 
-    res.status(200).json({
-        success: true,
-    })
+    successHandler(res,200, order, ORDER_DELETE);
 });
 
 
 const orderController = {
-newOrder,
-getUserOrders,
-getAllOrders,
-getOrder,
-updateOrder,
-deleteOrder,
+    newOrder,
+    getUserOrders,
+    getAllOrders,
+    getOrder,
+    updateOrder,
+    deleteOrder,
 };
 
 export default orderController;

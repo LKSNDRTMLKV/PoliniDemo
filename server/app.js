@@ -9,23 +9,25 @@ import routes from './routes/routes.js';
 import path from "path";
 
 
-const {product,user,order,payment} = routes;
 
-const app = express();    
+const { product, user, order, payment, subscription } = routes;
+
+const app = express();
 
 // const __dirname = path.resolve();
 
 //Config
-if(process.env.NODE_ENV === 'PRODUCTION') {
-    dotenv.config({path:'./config/.env'});
+if (process.env.NODE_ENV !== 'PRODUCTION') {
+    dotenv.config({ path: './config/.env' });
 }
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors({
-    origin: process.env.API_LOCAL_PRODUCTION,
-    credentials:true,
+    origin: [process.env.API_LOCAL_PRODUCTION, process.env.BASE_URL],
+    credentials: true,
 }));
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
@@ -35,6 +37,7 @@ app.use(product);
 app.use(user);
 app.use(order);
 // app.use('/app', payment);
+app.use(subscription);
 
 // app.use(express.static(path.join(__dirname, "../client/build")));
 

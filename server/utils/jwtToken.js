@@ -1,7 +1,7 @@
 //Create token and cookie
 
-const sendToken = (res, status, user) => {
-    const token = user.getJWTToken();
+const sendToken = (res, status, payload, message) => {
+    const token = payload.getJWTToken();
 
     const hours_24 = 24 * 60 * 60 * 1000;
 
@@ -19,8 +19,9 @@ const sendToken = (res, status, user) => {
 
     res.status(status).cookie('token', token, options).json({
         success:true,
-        user,
+        payload,
         token,
+        message,
     })
 }
 

@@ -1,8 +1,8 @@
-function successHandler (res, status, payload) {
-    
+function successHandler (res, status, payload, message) {
     res.status(status).json({
         success: true,
-        payload
+        payload,
+        message,
     })
 }
 

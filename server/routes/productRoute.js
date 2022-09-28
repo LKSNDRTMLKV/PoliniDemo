@@ -30,7 +30,7 @@ router.route('/reviews')
     .delete(user, deleteProductReview);
 
 //ADMIN
-router.route('/admin/products').get(getAllProducts); //dodaj admin
+router.route('/admin/products').get(admin, getAllProducts); 
 router.route('/admin/product/new').post(admin, createProduct);
 router.route('/admin/product/:id')
     .put(admin, updateProduct)
