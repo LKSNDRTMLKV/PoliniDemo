@@ -7,7 +7,7 @@
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.93",
-    "@mui/material": "^5.8.7",
+    "@mui/material": "^5.10.6",
     "@mui/x-data-grid": "^5.15.2",
     "@mui/x-data-grid-generator": "^5.15.2",
     "@testing-library/jest-dom": "^5.16.4",
